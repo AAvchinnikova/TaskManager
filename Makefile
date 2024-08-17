@@ -36,8 +36,8 @@ lint:
 test:
 	./gradlew test
 
-# report:
-# 	./gradlew jacocoTestReport
+report:
+	./gradlew JacocoTestReport
 
 update-js-deps:
 	npx ncu -u

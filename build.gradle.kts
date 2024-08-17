@@ -68,6 +68,6 @@ tasks.test {
 tasks.jacocoTestReport {
 	reports {
 		xml.required.set(true)
-		description = file("$/app/build/reports/jacoco/test/jacocoTestReport.xml").toString()
+		description = file("$/build/reports/jacoco/test/jacocoTestReport.xml").toString()
 	}
 }

@@ -2,54 +2,49 @@ package hexlet.code.conroller;
 
 import hexlet.code.dto.UserCreateDTO;
 import hexlet.code.dto.UserDTO;
+import hexlet.code.dto.UserUpdateDTO;
 import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.UserMapper;
 import hexlet.code.repository.UserRepository;
+import hexlet.code.service.UserService;
 import jakarta.validation.Valid;
+import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("api/users")
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
-    @Autowired
-    private UserMapper userMapper;
-
-    @GetMapping(path = "")
+    @GetMapping
     public List<UserDTO> index() {
-        var users = userRepository.findAll();
-        return users.stream()
-                .map(p -> userMapper.map(p))
-                .toList();
+        return userService.getAll();
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping("/{id}")
     public UserDTO show(@PathVariable long id) {
-
-        var user =  userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
-        var userDto = userMapper.map(user);
-        return userDto;
+        return userService.findById(id);
     }
 
-    @PostMapping(path = "")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UserDTO create(@Valid @RequestBody UserCreateDTO userData) {
-        var user = userMapper.map(userData);
-        userRepository.save(user);
-        var userDto = userMapper.map(user);
-        return userDto;
+        return userService.create(userData);
+    }
+
+    @PutMapping("/{id}")
+    public UserDTO update(@PathVariable long id, @Valid @RequestBody UserUpdateDTO data) {
+        return userService.update(id, data);
+    }
+
+    @DeleteMapping
+    public void delete(@PathVariable long id) {
+        userService.delete(id);
     }
 }

@@ -25,9 +25,8 @@ public class DataInitializer implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         var userData = new UserCreateDTO();
-        userData.setName("hexlet");
         userData.setEmail("hexlet@example.com");
-        userData.setPasswordDigest("123");
+        userData.setPasswordDigest("qwerty");
         User user = userMapper.map(userData);
         userRepository.save(user);
     }

@@ -9,7 +9,6 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Component;
 
-// BEGIN
 @Component
 public class JWTUtils {
 
@@ -27,4 +26,4 @@ public class JWTUtils {
         return this.encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
 }
-// END
+

@@ -33,11 +33,9 @@ public class User implements BaseEntity, UserDetails {
     @GeneratedValue(strategy = IDENTITY)
     private long id;
 
-    @NotBlank
     private String firstName;
 
-    @NotBlank
-    private String LastName;
+    private String lastName;
 
     @Email
     @Column(unique = true)
@@ -49,8 +47,6 @@ public class User implements BaseEntity, UserDetails {
     @CreatedDate
     private LocalDate createdAt;
 
-
-    // BEGIN
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return new ArrayList<GrantedAuthority>();
@@ -85,5 +81,4 @@ public class User implements BaseEntity, UserDetails {
     public boolean isEnabled() {
         return true;
     }
-    // END
 }

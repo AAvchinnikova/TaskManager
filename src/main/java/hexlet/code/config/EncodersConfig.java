@@ -17,11 +17,9 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 
-// BEGIN
 @Configuration
 public class EncodersConfig {
     @Autowired
-    // Создается ниже
     private RsaKeyProperties rsaKeys;
 
     @Bean
@@ -41,4 +39,3 @@ public class EncodersConfig {
         return NimbusJwtDecoder.withPublicKey(rsaKeys.getPublicKey()).build();
     }
 }
-// END

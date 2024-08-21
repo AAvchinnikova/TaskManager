@@ -1,6 +1,5 @@
 package hexlet.code.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
@@ -13,7 +12,7 @@ public class UserDTO {
 
     private String firstName;
 
-    private String LastName;
+    private String lastName;
 
     private String email;
 

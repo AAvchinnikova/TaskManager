@@ -19,7 +19,6 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
-// BEGIN
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -35,7 +34,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, HandlerMappingIntrospector introspector)
             throws Exception {
-        // По умолчанию все запрещено
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
@@ -63,4 +61,3 @@ public class SecurityConfig {
         return provider;
     }
 }
-// END

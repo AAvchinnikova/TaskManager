@@ -6,11 +6,17 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+    generate-ddl: true
   output:
     ansi:
       enabled: always
   profiles:
     default: development
+  application:
+    name: app
+  h2:
+    console:
+      enabled: true
 
 
 rsa:

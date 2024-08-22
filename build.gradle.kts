@@ -30,8 +30,8 @@ repositories {
 }
 
 dependencies {
-	compileOnly("org.projectlombok:lombok:1.18.30")
-	annotationProcessor("org.projectlombok:lombok:1.18.30")
+	compileOnly("org.projectlombok:lombok:1.18.34")
+	annotationProcessor("org.projectlombok:lombok:1.18.34")
 
 	implementation("org.mapstruct:mapstruct:1.5.5.Final")
 	annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
@@ -41,8 +41,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-devtools")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("net.datafaker:datafaker:2.0.2")
-	implementation("org.instancio:instancio-junit:3.3.1")
+	implementation("net.datafaker:datafaker:2.3.0")
+	implementation("org.instancio:instancio-junit:5.0.1")
 	implementation("org.openapitools:jackson-databind-nullable:0.2.6")
 
 	implementation("org.springframework.boot:spring-boot-starter-security")
@@ -51,10 +51,10 @@ dependencies {
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation(platform("org.junit:junit-bom:5.10.0"))
-	testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
-	testImplementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.2")
-	testCompileOnly("org.projectlombok:lombok:1.18.30")
-	testAnnotationProcessor("org.projectlombok:lombok:1.18.30")
+	testImplementation("org.junit.jupiter:junit-jupiter:5.10.3")
+	testImplementation("net.javacrumbs.json-unit:json-unit-assertj:3.2.7")
+	testCompileOnly("org.projectlombok:lombok:1.18.34")
+	testAnnotationProcessor("org.projectlombok:lombok:1.18.34")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 

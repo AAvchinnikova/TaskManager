@@ -1,31 +1,32 @@
 package hexlet.code.component;
 
-import hexlet.code.dto.UserCreateDTO;
-import hexlet.code.mapper.UserMapper;
 import hexlet.code.model.User;
 import hexlet.code.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import lombok.AllArgsConstructor;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @Component
 @AllArgsConstructor
 public class DataInitializer implements ApplicationRunner {
-
-    @Autowired
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
-    @Autowired
-    private final UserMapper userMapper;
-
     @Override
-    public void run(ApplicationArguments args) throws Exception {
-        var userData = new UserCreateDTO();
-        userData.setEmail("hexlet@example.com");
-        userData.setPassword("qwerty");
-        User user = userMapper.map(userData);
-        userRepository.save(user);
+    public void run(ApplicationArguments args) {
+        Optional<User> firstUser = userRepository.findByEmail("hexlet@example.com");
+        if (firstUser.isEmpty()) {
+            var email = "hexlet@example.com";
+            var userData = new User();
+            userData.setEmail(email);
+            userData.setPasswordDigest(passwordEncoder.encode("qwerty"));
+            userRepository.save(userData);
+        }
     }
 }

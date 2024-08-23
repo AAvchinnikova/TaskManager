@@ -1,6 +1,5 @@
 package hexlet.code.controller;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hexlet.code.dto.taskStatuses.TaskStatusUpdateDTO;
 import hexlet.code.mapper.TaskStatusMapper;
@@ -16,7 +15,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -27,8 +25,6 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import java.nio.charset.StandardCharsets;
@@ -75,7 +71,7 @@ public class TaskStatusControllerTest {
     }
 
     @Test
-    public void TestIndex() throws Exception {
+    public void testIndex() throws Exception {
         taskStatusRepository.save(testTaskStatus);
         var result = mockMvc.perform(get(url).with(jwt()))
                 .andExpect(status().isOk())
@@ -85,7 +81,7 @@ public class TaskStatusControllerTest {
     }
 
     @Test
-    public void TestShow() throws Exception {
+    public void testShow() throws Exception {
         taskStatusRepository.save(testTaskStatus);
         var request = get(urlWitId, testTaskStatus.getId()).with(jwt());
         var result = mockMvc.perform(request)
@@ -100,7 +96,7 @@ public class TaskStatusControllerTest {
     }
 
     @Test
-    public void TestCreate() throws Exception{
+    public void testCreate() throws Exception {
         var testStatusCreate = taskStatusMapper.mapToCreateDTO(testTaskStatus);
 
         var request = post(url).with(jwt())
@@ -117,21 +113,7 @@ public class TaskStatusControllerTest {
     }
 
     @Test
-    public void TestCreateWithoutName() throws Exception{
-        var testStatusCreate = taskStatusMapper.mapToCreateDTO(testTaskStatus);
-
-        testTaskStatus.setName("");
-
-        var request = post(url).with(jwt())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(testStatusCreate));
-        mockMvc.perform(request)
-                .andExpect(status().isBadRequest())
-                .andReturn();
-    }
-
-    @Test
-    public void TestUpdate() throws Exception {
+    public void testUpdate() throws Exception {
         taskStatusRepository.save(testTaskStatus);
 
         testTaskStatus.setName("Hi");

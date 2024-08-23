@@ -1,8 +1,8 @@
 package hexlet.code.controller.api;
 
-import hexlet.code.dto.UserCreateDTO;
-import hexlet.code.dto.UserDTO;
-import hexlet.code.dto.UserUpdateDTO;
+import hexlet.code.dto.user.UserCreateDTO;
+import hexlet.code.dto.user.UserDTO;
+import hexlet.code.dto.user.UserUpdateDTO;
 import hexlet.code.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,7 +47,7 @@ public class UserController {
         return userService.update(id, data);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable long id) {
         userService.delete(id);

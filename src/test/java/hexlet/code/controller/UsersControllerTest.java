@@ -1,6 +1,6 @@
 package hexlet.code.controller;
 
-import hexlet.code.dto.UserCreateDTO;
+import hexlet.code.dto.user.UserCreateDTO;
 import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.UserMapper;
 import hexlet.code.model.User;
@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import java.nio.charset.StandardCharsets;
@@ -228,5 +229,16 @@ class UsersControllerTest {
 
         mockMvc.perform(request)
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void delete() throws Exception {
+        userRepository.save(testUser);
+
+        var request = MockMvcRequestBuilders.delete("/api/users/{id}", testUser.getId()).with(jwt());
+
+        mockMvc.perform(request).andExpect(status().isNoContent());
+
+        assertThat(userRepository.existsById(testUser.getId())).isFalse();
     }
 }

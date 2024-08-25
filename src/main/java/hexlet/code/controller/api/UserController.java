@@ -1,8 +1,8 @@
 package hexlet.code.controller.api;
 
-import hexlet.code.dto.user.UserCreateDTO;
-import hexlet.code.dto.user.UserDTO;
-import hexlet.code.dto.user.UserUpdateDTO;
+import hexlet.code.dto.users.UserCreateDTO;
+import hexlet.code.dto.users.UserDTO;
+import hexlet.code.dto.users.UserUpdateDTO;
 import hexlet.code.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;

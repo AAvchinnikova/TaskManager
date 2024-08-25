@@ -53,7 +53,9 @@ public class TaskStatusControllerTest {
     private ModelGenerator modelGenerator;
 
     private TaskStatus testTaskStatus;
+
     private String url = "/api/task_statuses";
+
     private String urlWitId = "/api/task_statuses/{id}";
 
     @BeforeEach

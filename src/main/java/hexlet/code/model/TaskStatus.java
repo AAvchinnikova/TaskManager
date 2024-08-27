@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -31,28 +32,20 @@ public class TaskStatus implements BaseEntity {
     @GeneratedValue(strategy = IDENTITY)
     private long id;
 
-    @NotBlank
+    @NotBlank(message = "Name is required")
+    @Size(min = 1, message = "Minimal name length is about 1 symbol")
     @Column(unique = true)
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "Slug is required")
+    @Size(min = 1, message = "Minimal slug length is about 1 symbol")
     @Column(unique = true)
     private String slug;
 
     @CreatedDate
     private LocalDate createdAt;
 
-    @OneToMany(mappedBy = "taskStatus", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Task> tasks = new ArrayList<>();
-
-    public void addTask(Task task) {
-        tasks.add(task);
-        task.setTaskStatus(this);
-    }
-
-    public void removeTask(Task task) {
-        tasks.remove(task);
-        task.setTaskStatus(null);
-    }
+    @OneToMany(mappedBy = "taskStatus")
+    private List<Task> tasks;
 
 }

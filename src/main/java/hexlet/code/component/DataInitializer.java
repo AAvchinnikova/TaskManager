@@ -42,5 +42,7 @@ public class DataInitializer implements ApplicationRunner {
             status.setSlug(s);
             return status;
         }).forEach(taskStatusRepository::save);
+
+
     }
 }

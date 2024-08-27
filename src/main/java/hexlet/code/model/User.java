@@ -1,5 +1,6 @@
 package hexlet.code.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
@@ -12,7 +13,9 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Getter;
@@ -40,33 +43,23 @@ public class User implements BaseEntity, UserDetails {
 
     private String lastName;
 
-    @Email
+    @Email(message = "Wrong email format")
     @Column(unique = true)
+    @NotBlank(message = "Email is requried")
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "Password id requried")
+    @Size(min = 3, message = "Minimal password length is about 3 symbols")
     private String passwordDigest;
 
     @CreatedDate
     private LocalDate createdAt;
 
+    @LastModifiedDate
+    private LocalDate updateAt;
+
     @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Task> tasks = new ArrayList<>();
-
-    public void addTask(Task task) {
-        tasks.add(task);
-        task.setAssignee(this);
-    }
-
-    public void removeTask(Task task) {
-        tasks.remove(task);
-        task.setAssignee(null);
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<GrantedAuthority>();
-    }
+    private List<Task> tasks;
 
     @Override
     public String getPassword() {
@@ -96,5 +89,10 @@ public class User implements BaseEntity, UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return new ArrayList<GrantedAuthority>();
     }
 }

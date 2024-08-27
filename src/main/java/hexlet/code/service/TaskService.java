@@ -6,6 +6,7 @@ import hexlet.code.dto.tasks.TaskUpdateDTO;
 import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.TaskMapper;
 import hexlet.code.model.Task;
+import hexlet.code.model.User;
 import hexlet.code.repository.TaskRepository;
 import hexlet.code.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class TaskService {
     private TaskRepository taskRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private TaskMapper taskMapper;
 
     public List<TaskDTO> getAll() {
@@ -43,8 +47,6 @@ public class TaskService {
         try {
             var task = taskMapper.map(data);
             taskRepository.save(task);
-            task.setAssignee(data.getAssigneeId());
-            task.setTaskStatus(data.getTaskStatus());
             return taskMapper.map(task);
         } catch (NoSuchElementException ex) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());

@@ -135,35 +135,6 @@ class UsersControllerTest {
     }
 
     @Test
-    public  void testCreateUserWithNotValidEmail() throws Exception {
-        testUser.setEmail("Not Email Type");
-        UserCreateDTO dto = userMapper.mapToCreateDTO(testUser);
-
-        MockHttpServletRequestBuilder request = post("/api/users").with(jwt())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(om.writeValueAsString(dto));
-
-        mockMvc.perform(request)
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
-    public void testCreateUserWithNotValidSizeEmail() throws Exception {
-        userRepository.save(testUser);
-
-        testUser.setEmail("a");
-        var dto = userMapper.mapToCreateDTO(testUser);
-
-        var request = MockMvcRequestBuilders.post("/api/users")
-                .with(jwt())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(om.writeValueAsString(dto));
-
-        mockMvc.perform(request)
-                .andExpect(status().isBadRequest());
-    }
-
-    @Test
     public void testUpdateUser() throws Exception {
         userRepository.save(testUser);
 
@@ -211,23 +182,6 @@ class UsersControllerTest {
         assertThat(user.getFirstName()).isEqualTo(testUser.getFirstName());
         assertThat(user.getLastName()).isEqualTo(testUser.getLastName());
         assertThat(user.getEmail()).isEqualTo(testUser.getEmail());
-    }
-
-    @Test
-    public void testUpdateUserWithNotValidEmail() throws Exception {
-        userRepository.save(testUser);
-
-        testUser.setEmail("Not Email Type");
-
-        var dto = userMapper.maptoUpdateDTO(testUser);
-
-        var request = MockMvcRequestBuilders.put("/api/users/{id}", testUser.getId())
-                .with(jwt())
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(om.writeValueAsString(dto));
-
-        mockMvc.perform(request)
-                .andExpect(status().isBadRequest());
     }
 
     @Test

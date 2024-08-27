@@ -107,7 +107,7 @@ public class TaskStatusControllerTest {
         mockMvc.perform(request)
                 .andExpect(status().isCreated())
                 .andReturn();
-        var taskStatus = taskStatusRepository.findBySlug(testTaskStatus.getSlug());
+        var taskStatus = taskStatusRepository.findBySlug(testStatusCreate.getSlug()).get();
 
         assertThat(taskStatus).isNotNull();
         assertThat(taskStatus.getName()).isEqualTo(testTaskStatus.getName());

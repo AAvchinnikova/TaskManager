@@ -1,6 +1,5 @@
 package hexlet.code.controller;
 
-import hexlet.code.dto.users.UserCreateDTO;
 import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.UserMapper;
 import hexlet.code.model.User;

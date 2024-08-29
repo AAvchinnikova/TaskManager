@@ -2,8 +2,6 @@ package hexlet.code.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hexlet.code.mapper.TaskMapper;
-import hexlet.code.mapper.TaskStatusMapper;
-import hexlet.code.mapper.UserMapper;
 import hexlet.code.model.Task;
 import hexlet.code.model.TaskStatus;
 import hexlet.code.model.User;
@@ -91,7 +89,7 @@ public class TaskControllerTest {
     }
 
     @Test
-    public void testIndex() throws Exception{
+    public void testIndex() throws Exception {
         var result = mockMvc.perform(get(url).with(jwt()))
                 .andExpect(status().isOk())
                 .andReturn();

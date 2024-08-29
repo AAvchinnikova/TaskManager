@@ -2,7 +2,9 @@ package hexlet.code.controller;
 
 import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.UserMapper;
+import hexlet.code.model.Task;
 import hexlet.code.model.User;
+import hexlet.code.repository.TaskRepository;
 import hexlet.code.repository.UserRepository;
 import hexlet.code.util.ModelGenerator;
 import org.junit.jupiter.api.AfterEach;
@@ -46,12 +48,17 @@ class UsersControllerTest {
     private UserRepository userRepository;
 
     @Autowired
+    private TaskRepository taskRepository;
+
+    @Autowired
     private UserMapper userMapper;
 
     @Autowired
     private ModelGenerator modelGenerator;
 
     private User testUser;
+
+    private Task testTask;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -60,6 +67,8 @@ class UsersControllerTest {
                 .apply(springSecurity())
                 .build();
         testUser = Instancio.of(modelGenerator.getUserModel()).create();
+        testTask = Instancio.of(modelGenerator.getTaskModel()).create();
+
     }
     @AfterEach
     public void clear() {
@@ -83,7 +92,7 @@ class UsersControllerTest {
     public void testIndexWithoutAuth() throws Exception {
         userRepository.save(testUser);
 
-        var result = mockMvc.perform(get("/users"))
+        mockMvc.perform(get("/users"))
                 .andExpect(status().isUnauthorized());
     }
 
@@ -110,7 +119,7 @@ class UsersControllerTest {
 
         var request = get("/users/{id}", testUser.getId());
 
-        var result = mockMvc.perform(request)
+        mockMvc.perform(request)
                 .andExpect(status().isUnauthorized());
     }
 
@@ -193,4 +202,5 @@ class UsersControllerTest {
 
         assertThat(userRepository.existsById(testUser.getId())).isFalse();
     }
+
 }

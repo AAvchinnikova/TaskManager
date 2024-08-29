@@ -3,13 +3,13 @@ package hexlet.code.service;
 import hexlet.code.dto.users.UserCreateDTO;
 import hexlet.code.dto.users.UserDTO;
 import hexlet.code.dto.users.UserUpdateDTO;
+import hexlet.code.exception.LinkedTaskFoundException;
 import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.UserMapper;
 import hexlet.code.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
@@ -23,7 +23,6 @@ public class UserService {
     private UserRepository userRepository;
     @Autowired
     private UserMapper userMapper;
-    private final PasswordEncoder passwordEncoder;
 
     public List<UserDTO> getAll() {
         var result = userRepository.findAll();
@@ -55,8 +54,12 @@ public class UserService {
     }
 
     public void delete(long id) {
-        userRepository.findById(id)
+        var user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("user with id " + id + " not found"));
+        var userTasks = user.getTasks();
+        if (!userTasks.isEmpty()) {
+            throw new LinkedTaskFoundException("User cannot be delete. Delete assigned task first");
+        }
         userRepository.deleteById(id);
     }
 

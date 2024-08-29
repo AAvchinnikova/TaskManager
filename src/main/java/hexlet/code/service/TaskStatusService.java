@@ -3,6 +3,7 @@ package hexlet.code.service;
 import hexlet.code.dto.taskStatuses.TaskStatusCreateDTO;
 import hexlet.code.dto.taskStatuses.TaskStatusDTO;
 import hexlet.code.dto.taskStatuses.TaskStatusUpdateDTO;
+import hexlet.code.exception.LinkedTaskFoundException;
 import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.TaskStatusMapper;
 import hexlet.code.repository.TaskStatusRepository;
@@ -55,6 +56,10 @@ public class TaskStatusService {
     public void delete(long id) {
         var taskStatus = taskStatusRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Status with id " + id + " not found"));
+        var tasks = taskStatus.getTasks();
+        if (!tasks.isEmpty()) {
+            throw new LinkedTaskFoundException("User cannot be delete. Delete assigned task first");
+        }
         taskStatusRepository.deleteById(id);
     }
 }

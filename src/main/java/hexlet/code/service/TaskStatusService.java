@@ -58,7 +58,7 @@ public class TaskStatusService {
                 .orElseThrow(() -> new ResourceNotFoundException("Status with id " + id + " not found"));
         var tasks = taskStatus.getTasks();
         if (!tasks.isEmpty()) {
-            throw new LinkedTaskFoundException("User cannot be delete. Delete assigned task first");
+            throw new LinkedTaskFoundException("Task status cannot be delete. Delete assigned task first");
         }
         taskStatusRepository.deleteById(id);
     }

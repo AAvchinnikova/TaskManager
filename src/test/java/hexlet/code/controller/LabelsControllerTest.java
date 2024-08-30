@@ -1,10 +1,8 @@
 package hexlet.code.controller;
 
 import hexlet.code.dto.labels.LabelCreateDTO;
-import hexlet.code.dto.taskStatuses.TaskStatusUpdateDTO;
-import hexlet.code.exception.ResourceNotFoundException;
+import hexlet.code.dto.labels.LabelUpdateDTO;
 import hexlet.code.mapper.LabelMapper;
-import hexlet.code.mapper.UserMapper;
 import hexlet.code.model.Label;
 import hexlet.code.model.Task;
 import hexlet.code.model.User;
@@ -29,7 +27,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import java.nio.charset.StandardCharsets;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -127,7 +124,7 @@ class LabelsControllerTest {
         mockMvc.perform(request)
                 .andExpect(status().isCreated())
                 .andReturn();
-        var testLabel = labelRepository.findByIName(labelCreate.getName()).get();
+        var testLabel = labelRepository.findByName(labelCreate.getName()).get();
 
         assertThat(testLabel).isNotNull();
         assertThat(testLabel.getName()).isEqualTo(labelCreate.getName());
@@ -137,9 +134,9 @@ class LabelsControllerTest {
     public void testUpdate() throws Exception {
         labelRepository.save(testLabel);
 
-        testLabel.setName("Hi");
+        testLabel.setName("Hello");
 
-        var labelUpdate = labelMapper.maptoUpdateDTO(testLabel);
+        LabelUpdateDTO labelUpdate = labelMapper.maptoUpdateDTO(testLabel);
 
         var request = put(urlWitId, testLabel.getId()).with(jwt())
                 .contentType(MediaType.APPLICATION_JSON)
@@ -149,7 +146,7 @@ class LabelsControllerTest {
                 .andReturn();
         var result = labelRepository.findById(testLabel.getId()).get();
 
-        assertThat(result.getName()).isEqualTo("Hi");
+        assertThat(result.getName()).isEqualTo("Hello");
     }
 
     @Test

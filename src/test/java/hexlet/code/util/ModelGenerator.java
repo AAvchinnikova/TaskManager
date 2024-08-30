@@ -13,6 +13,7 @@ import org.instancio.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+
 @Getter
 @Component
 public class ModelGenerator {
@@ -43,13 +44,14 @@ public class ModelGenerator {
                 .ignore(Select.field(TaskStatus::getId))
                 .ignore(Select.field(TaskStatus::getTasks))
                 .supply(Select.field(TaskStatus::getName), () -> faker.name().title())
-                .supply(Select.field(TaskStatus::getSlug), () -> faker.internet().slug())
+                .supply(Select.field(TaskStatus::getSlug), () -> faker.name().title())
                 .toModel();
 
         taskModel = Instancio.of(Task.class)
                 .ignore(Select.field((Task::getId)))
                 .ignore(Select.field(Task::getAssignee))
                 .ignore(Select.field(Task::getTaskStatus))
+                .ignore(Select.field(Task::getLabels))
                 .supply(Select.field(Task::getName), () -> faker.name().title())
                 .supply(Select.field(Task::getIndex), () -> faker.number().randomDigitNotZero())
                 .supply(Select.field(Task::getDescription), () -> faker.lorem().sentence())
@@ -57,7 +59,7 @@ public class ModelGenerator {
 
         labelModel = Instancio.of(Label.class)
                 .ignore(Select.field(Label::getId))
-                .supply(Select.field(Label::getName), () -> faker.name().title())
+                .supply(Select.field(Label::getName), () -> faker.name().name())
                 .toModel();
 
     }

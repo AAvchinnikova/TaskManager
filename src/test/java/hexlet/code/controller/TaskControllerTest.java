@@ -119,6 +119,19 @@ public class TaskControllerTest {
     }
 
     @Test
+    public void testIndexWithTitleContains() throws Exception {
+        var testTaskTitle = testTask.getName();
+        var result = mockMvc.perform(get(url + "?titleCont=" + testTaskTitle).with(jwt()))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        var body = result.getResponse().getContentAsString();
+        assertThatJson(body).isArray().allSatisfy(element ->
+                assertThatJson(element)
+                        .and(v -> v.node("title").asString().contains(testTaskTitle)));
+    }
+
+    @Test
     public void testShow() throws Exception {
         taskRepository.save(testTask);
         taskRepository.save(testTask);

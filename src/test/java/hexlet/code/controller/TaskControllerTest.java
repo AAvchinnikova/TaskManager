@@ -77,9 +77,9 @@ public class TaskControllerTest {
 
     private TaskStatus testTaskStatus;
 
-    private String url = "/api/tasks";
+    private final String url = "/api/tasks";
 
-    private String urlWitId = "/api/tasks/{id}";
+    private final String urlWitId = "/api/tasks/{id}";
 
     @BeforeEach
     public void setUp() throws Exception {

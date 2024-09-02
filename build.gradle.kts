@@ -7,10 +7,14 @@ plugins {
 	application
 	checkstyle
 	jacoco
+	id("checkstyle")
 	id("org.springframework.boot") version "3.3.3"
 	id("io.spring.dependency-management") version "1.1.6"
 	id("com.github.ben-manes.versions") version "0.50.0"
 	id("io.freefair.lombok") version "8.6"
+	id ("com.github.johnrengelman.processes") version "0.5.0"
+	id("org.springdoc.openapi-gradle-plugin") version "1.8.0"
+	id ("io.sentry.jvm.gradle") version "4.4.1"
 
 }
 
@@ -50,9 +54,13 @@ dependencies {
 
 	compile("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.6.8")
 
+	implementation("io.sentry:sentry-spring-boot-starter-jakarta:7.8.0")
+
 	implementation("net.datafaker:datafaker:2.3.1")
 	implementation("org.instancio:instancio-junit:5.0.1")
 	implementation("org.openapitools:jackson-databind-nullable:0.2.6")
+
+	implementation ("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
 
 
 	testImplementation("org.springframework.security:spring-security-test")

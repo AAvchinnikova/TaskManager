@@ -10,11 +10,16 @@ import java.util.Set;
 @Setter
 public class TaskUpdateDTO {
 
+    @JsonProperty("assignee_id")
+    private JsonNullable<Long> assigneeId;
+
     @JsonProperty("title")
-    private String name;
+    private JsonNullable<String> name;
 
     @JsonProperty("content")
     private JsonNullable<String> description;
 
-    private Set<Long> taskLabelIds;
+    private JsonNullable<String> status;
+
+    private JsonNullable<Set<Long>> taskLabelIds;
 }

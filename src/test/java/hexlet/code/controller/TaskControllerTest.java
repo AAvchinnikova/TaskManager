@@ -170,6 +170,7 @@ public class TaskControllerTest {
         taskRepository.save(testTask);
 
         testTask.setName("Hello");
+        testTask.setDescription("NewLabel");
 
         TaskUpdateDTO labelUpdate = taskMapper.maptoUpdateDTO(testTask);
 
@@ -182,6 +183,7 @@ public class TaskControllerTest {
         var result = taskRepository.findById(testTask.getId()).get();
 
         assertThat(result.getName()).isEqualTo("Hello");
+        assertThat(result.getDescription()).isEqualTo("NewLabel");
     }
 
     @Test

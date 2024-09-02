@@ -119,6 +119,7 @@ public class TaskStatusControllerTest {
         taskStatusRepository.save(testTaskStatus);
 
         testTaskStatus.setName("Hi");
+        testTaskStatus.setSlug("NewSlug");
 
         TaskStatusUpdateDTO testStatusUpdate = taskStatusMapper.maptoUpdateDTO(testTaskStatus);
 
@@ -131,6 +132,7 @@ public class TaskStatusControllerTest {
         var result = taskStatusRepository.findById(testTaskStatus.getId()).get();
 
         assertThat(result.getName()).isEqualTo("Hi");
+        assertThat(result.getSlug()).isEqualTo("NewSlug");
     }
 
     @Test

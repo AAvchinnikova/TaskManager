@@ -54,7 +54,7 @@ dependencies {
 
 	compile("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.6.8")
 
-	implementation("io.sentry:sentry-spring-boot-starter-jakarta:7.8.0")
+	implementation("io.sentry:sentry-spring-boot-starter-jakarta:7.14.0")
 
 	implementation("net.datafaker:datafaker:2.3.1")
 	implementation("org.instancio:instancio-junit:5.0.1")

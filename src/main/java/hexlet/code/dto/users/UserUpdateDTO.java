@@ -17,11 +17,10 @@ public class UserUpdateDTO {
     private JsonNullable<String> lastName;
 
     @Email(message = "Wrong email format")
-    @Column(unique = true)
     @NotBlank(message = "Email is requried")
-    private String email;
+    private JsonNullable<String> email;
 
     @NotBlank(message = "Password id requried")
     @Size(min = 3, message = "Minimal password length is about 3 symbols")
-    private String password;
+    private JsonNullable<String> password;
 }

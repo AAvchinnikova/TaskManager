@@ -2,14 +2,15 @@ package hexlet.code.utils;
 
 import hexlet.code.model.User;
 import hexlet.code.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class UserUtils {
-    @Autowired
+
     private UserRepository userRepository;
 
     public User getCurrentUser() {

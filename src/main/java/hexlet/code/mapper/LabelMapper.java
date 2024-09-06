@@ -16,6 +16,7 @@ import org.mapstruct.ReportingPolicy;
         componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE
 )
+
 public abstract class LabelMapper {
 
     public abstract Label map(LabelCreateDTO dto);

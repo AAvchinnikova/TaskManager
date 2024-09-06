@@ -1,13 +1,13 @@
 package hexlet.code.service;
 
-import hexlet.code.dto.taskStatuses.TaskStatusCreateDTO;
-import hexlet.code.dto.taskStatuses.TaskStatusDTO;
-import hexlet.code.dto.taskStatuses.TaskStatusUpdateDTO;
+import hexlet.code.dto.task.statuses.TaskStatusCreateDTO;
+import hexlet.code.dto.task.statuses.TaskStatusDTO;
+import hexlet.code.dto.task.statuses.TaskStatusUpdateDTO;
 import hexlet.code.exception.LinkedTaskFoundException;
 import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.TaskStatusMapper;
 import hexlet.code.repository.TaskStatusRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -16,12 +16,11 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
+@AllArgsConstructor
 public class TaskStatusService {
 
-    @Autowired
     private TaskStatusRepository taskStatusRepository;
 
-    @Autowired
     private TaskStatusMapper taskStatusMapper;
 
     public List<TaskStatusDTO> getAll() {

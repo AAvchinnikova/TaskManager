@@ -8,7 +8,6 @@ import hexlet.code.exception.ResourceNotFoundException;
 import hexlet.code.mapper.UserMapper;
 import hexlet.code.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,9 +18,8 @@ import java.util.NoSuchElementException;
 @AllArgsConstructor
 public class UserService {
 
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
+
     private UserMapper userMapper;
 
     public List<UserDTO> getAll() {

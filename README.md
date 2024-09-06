@@ -34,3 +34,10 @@
 
 ### Создание пользователя
 ![image](https://github.com/user-attachments/assets/1e8531a5-d886-43a5-a71f-a0a827cb16fb)
+
+![image](https://github.com/user-attachments/assets/010ecc93-df21-4c38-b9a6-064917423c04)
+
+### Создание задачи
+
+
+

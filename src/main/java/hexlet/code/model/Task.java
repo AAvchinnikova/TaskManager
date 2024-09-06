@@ -1,6 +1,7 @@
 package hexlet.code.model;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
@@ -10,8 +11,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -34,12 +33,12 @@ public class Task implements BaseEntity {
     @GeneratedValue(strategy = IDENTITY)
     private long id;
 
-    @NotBlank(message = "Name is required")
-    @Size(min = 1, message = "Minimal name length is about 1 symbol")
+    @Column(nullable = false)
     private String name;
 
     private int index;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @ManyToOne

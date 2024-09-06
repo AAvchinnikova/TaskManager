@@ -11,8 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -42,13 +41,12 @@ public class User implements BaseEntity, UserDetails {
 
     private String lastName;
 
-    @Email(message = "Wrong email format")
     @Column(unique = true)
-    @NotBlank(message = "Email is requried")
+    @Email
+    @ToString.Include
     private String email;
 
-    @NotBlank(message = "Password id requried")
-    @Size(min = 3, message = "Minimal password length is about 3 symbols")
+    @Column(nullable = false)
     private String passwordDigest;
 
     @CreatedDate
@@ -57,7 +55,7 @@ public class User implements BaseEntity, UserDetails {
     @LastModifiedDate
     private LocalDate updateAt;
 
-    @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "assignee", cascade = CascadeType.ALL)
     private List<Task> tasks;
 
     @Override

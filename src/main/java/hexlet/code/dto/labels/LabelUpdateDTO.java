@@ -1,6 +1,5 @@
 package hexlet.code.dto.labels;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;

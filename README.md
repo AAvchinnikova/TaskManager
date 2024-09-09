@@ -32,5 +32,33 @@
 Развертывание в production: Docker
 Задеплоено на бесплатный сервер от Render: https://java-project-99-b3db.onrender.com
 
-### Создание пользователя
+### Пользователи(Users)
 ![image](https://github.com/user-attachments/assets/1e8531a5-d886-43a5-a71f-a0a827cb16fb)
+
+![image](https://github.com/user-attachments/assets/010ecc93-df21-4c38-b9a6-064917423c04)
+
+### Задачи(Tasks)
+![image](https://github.com/user-attachments/assets/842e231a-a51b-402d-9541-0e72daf996e4)
+
+![image](https://github.com/user-attachments/assets/ad601e59-bf75-4bce-858f-277fd5a9b130)
+
+### Статус задач(Task statuses)
+
+![image](https://github.com/user-attachments/assets/cbc1bd2c-9015-494c-ba2f-11e089e25080)
+
+
+![image](https://github.com/user-attachments/assets/8ac5ade2-ec78-447a-84d4-ec0db86c1f6b)
+
+### Labels
+
+![image](https://github.com/user-attachments/assets/36231878-6934-453f-9281-8adbd3f1ffd5)
+
+![image](https://github.com/user-attachments/assets/3f8b73c8-2e3c-4600-aba8-746ffd742742)
+
+
+
+
+
+
+
+
